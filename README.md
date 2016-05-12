@@ -1,2 +1,2 @@
 # uploading
-Pure Client Side JavaSciprt module for uploading file to cdn (https://qiniu.com)
+Pure Browser JavaScript module for uploading file to CDN (https://qiniu.com)
