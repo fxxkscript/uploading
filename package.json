@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/rayqian/uploading/issues"
   },
-  "homepage": "https://github.com/rayqian/uploading#readme"
+  "homepage": "https://github.com/rayqian/uploading#readme",
+  "devDependencies": {
+    "karma": "^0.13.22"
+  }
 }

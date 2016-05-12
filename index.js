@@ -13,9 +13,9 @@ function Uploading(url, file, token, method) {
 }
 
 Uploading.prototype.send = function() {
-    let data = this._prepareData();
+    this._data = this._prepareData();
 
-    return this._uploading(data);
+    return this._uploading(this._data);
 };
 
 Uploading.prototype._prepareData = function() {
@@ -52,6 +52,14 @@ Uploading.prototype._uploading = function(data) {
     return promise;
 };
 
+Uploading.prototype.destroy = function() {
+    this._files = null;
+    this._url = null;
+    this._method = null;
+    this._token = null;
+    this._data = null;
+};
+
 /*
 
     DOM Binding
@@ -60,6 +68,13 @@ Uploading.prototype._uploading = function(data) {
 
 function InputFile(element) {
     this._element = element;
+    this._files = null;
+
+    this.init();
+};
+
+InputFile.prototype.init = function() {
+    this.bindDOM();
 };
 
 InputFile.prototype.bindDOM = function () {
@@ -77,4 +92,12 @@ InputFile.prototype.unbindDom = function() {
 
 InputFile.prototype.getFile = function() {
     return this._files;
+};
+
+InputFile.prototype.destroy = function() {
+    this.unbindDom();
+
+    this._element = null;
+    this._handler = null;
+    this._files = null;
 };
