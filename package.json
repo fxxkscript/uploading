@@ -1,0 +1,25 @@
+{
+  "name": "uploading",
+  "version": "0.0.1",
+  "description": "Pure Browser JavaScript module for uploading file to CDN ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rayqian/uploading.git"
+  },
+  "keywords": [
+    "upload",
+    "cdn",
+    "qiniu",
+    "browser"
+  ],
+  "author": "Ray",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rayqian/uploading/issues"
+  },
+  "homepage": "https://github.com/rayqian/uploading#readme"
+}
