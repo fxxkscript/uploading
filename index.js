@@ -5,12 +5,43 @@
 
 **/
 
-function Uploading(url, file, token, method) {
+function Uploading(url, file, getTokenURL, method) {
     this._file = file;
     this._url = url;
     this._method = method;
-    this._token = token;
+    this._getTokenURL = getTokenURL;
+
+
 }
+
+Uploading.prototype.getToken = function() {
+    var formData = new FormData();
+    formData.append('scope', 'kdt_img_test');
+
+    return this.ajax(this._getTokenURL, formData, 'POST');
+};
+
+Uploading.prototype.ajax = function(url, data, method) {
+    var promise = new Promise((resolve, reject) => {
+        var request = new XMLHttpRequest();
+
+        request.withCredentials = true;
+
+        request.addEventListener('load', (event) => {
+            resolve(event);
+        });
+
+        let fail = event => { reject(event); }
+
+        request.addEventListener('error', fail);
+        request.addEventListener('abort', fail);
+
+        request.open(method, url);
+        request.send(data);
+    });
+
+    return promise;
+};
 
 Uploading.prototype.send = function() {
     this._data = this._prepareData();
@@ -31,25 +62,8 @@ Uploading.prototype._uploading = function(data) {
     if (!this._url) {
         throw new Error('url cannot be empty');
     }
-    var promise = new Promise((resolve, reject) => {
-        var request = new XMLHttpRequest();
 
-        request.withCredentials = true;
-
-        request.addEventListener('load', (event) => {
-            resolve(event);
-        });
-
-        let fail = event => { reject(event); }
-
-        request.addEventListener('error', fail);
-        request.addEventListener('abort', fail);
-
-        request.open(this._method, this._url);
-        request.send(data);
-    });
-
-    return promise;
+    return this.ajax(this.url, data, this.method);
 };
 
 Uploading.prototype.destroy = function() {

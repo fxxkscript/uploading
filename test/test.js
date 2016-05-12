@@ -7,6 +7,16 @@ QUnit.test('if not select a file, can not get file', function(assert) {
     assert.ok(input.getFile() === null, 'ok');
 });
 
+QUnit.test( 'can get token', function( assert ) {
+    var done = assert.async();
+
+    var uploading = new Uploading();
+    uploading.getToken().then(function(event) {
+        console.log(event);
+        assert.ok(event !== null, 'event got');
+        done();
+    });
+});
 
 QUnit.test( 'if select a file, can get file', function( assert ) {
     var done = assert.async();
